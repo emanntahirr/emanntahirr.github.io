@@ -48,3 +48,34 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+#terminal-frame {
+  position: relative;
+  max-width: 960px;
+  margin: 60px auto;
+  padding: 24px;
+  border: 1px solid rgba(79, 209, 197, 0.4);
+}
+
+#terminal-frame::before,
+#terminal-frame::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #4fd1c5;
+}
+
+#terminal-frame::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+#terminal-frame::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
