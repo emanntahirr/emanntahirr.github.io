@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0b0e11;
+  color: #dcdcdc;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+#terminal {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+#output {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  margin-right: 8px;
+  color: #3aff6f;
+}
+
+#commandInput {
+  background: none;
+  border: none;
+  color: #dcdcdc;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  flex: 1;
+}
+
+a {
+  color: #4fd1c5;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
