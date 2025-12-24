@@ -13,6 +13,12 @@ const bootScreen = document.getElementById("boot-screen");
 const bootText = document.getElementById("boot-text");
 const output = document.getElementById("output");
 const input = document.getElementById("commandInput");
+const canvas = document.getElementById("binary-bg");
+const ctx = canvas.getContext("2d");
+
+let cols;
+let rows;
+let grid = [];
 
 const commands = {
   help: `
@@ -98,15 +104,20 @@ function print(text) {
 }
 
 function bootSequence() {
+  startBinaryAnimation();
   typeBootText(bootLines);
 
   document.addEventListener("keydown", () => {
-  bootScreen.classList.add("fade-out");
-  setTimeout(() => {
-    bootScreen.style.display = "none";
-  }, 600);
-}, { once: true });
+    bootScreen.classList.add("fade-out");
+
+    clearInterval(binaryInterval);
+
+    setTimeout(() => {
+      bootScreen.style.display = "none";
+    }, 600);
+  }, { once: true });
 }
+
 
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
@@ -148,4 +159,42 @@ function typeBootText(lines, lineIndex = 0, charIndex = 0) {
   }
 }
 
+function initBinaryGrid() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const fontSize = 16;
+  cols = Math.floor(canvas.width / fontSize);
+  rows = Math.floor(canvas.height / fontSize);
+
+  grid = Array.from({ length: cols * rows }, () =>
+    Math.random() > 0.5 ? "1" : "0"
+  );
+
+  ctx.font = `${fontSize}px JetBrains Mono`;
+  ctx.fillStyle = "#4fd1c5";
+}
+function drawBinaryGrid() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = 0; i < grid.length; i++) {
+    if (Math.random() > 0.98) {
+      grid[i] = grid[i] === "0" ? "1" : "0";
+    }
+
+    const x = (i % cols) * 16;
+    const y = Math.floor(i / cols) * 16;
+
+    ctx.fillText(grid[i], x, y);
+  }
+}
+let binaryInterval;
+
+function startBinaryAnimation() {
+  initBinaryGrid();
+  binaryInterval = setInterval(drawBinaryGrid, 120);
+}
+
 bootSequence();
+window.addEventListener("resize", initBinaryGrid);
+
