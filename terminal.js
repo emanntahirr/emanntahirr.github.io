@@ -101,8 +101,11 @@ function bootSequence() {
   typeBootText(bootLines);
 
   document.addEventListener("keydown", () => {
+  bootScreen.classList.add("fade-out");
+  setTimeout(() => {
     bootScreen.style.display = "none";
-  }, { once: true });
+  }, 600);
+}, { once: true });
 }
 
 input.addEventListener("keydown", function (e) {
