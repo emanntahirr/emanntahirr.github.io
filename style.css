@@ -79,3 +79,32 @@ a:hover {
   border-left: none;
   border-top: none;
 }
+
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  background: #0b0e11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#boot-text {
+  color: #4fd1c5;
+  font-size: 1.2rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}

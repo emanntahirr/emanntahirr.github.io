@@ -1,3 +1,16 @@
+const bootLines = [
+  "> initialising system...",
+  "> loading profile...",
+  "> hello",
+  "> my name is eman",
+  "> computer science undergraduate",
+  "> systems | backend | algorithms",
+  "",
+  "press any key to enter terminal"
+];
+
+const bootScreen = document.getElementById("boot-screen");
+const bootText = document.getElementById("boot-text");
 const output = document.getElementById("output");
 const input = document.getElementById("commandInput");
 
@@ -85,14 +98,11 @@ function print(text) {
 }
 
 function bootSequence() {
-  const bootText = `
-> boot eman_tahir
-initialising system...
-loading profile...
+  typeBootText(bootLines);
 
-Type 'help' to begin.
-`;
-  print(bootText);
+  document.addEventListener("keydown", () => {
+    bootScreen.style.display = "none";
+  }, { once: true });
 }
 
 input.addEventListener("keydown", function (e) {
@@ -113,5 +123,26 @@ input.addEventListener("keydown", function (e) {
     input.value = "";
   }
 });
+
+function typeBootText(lines, lineIndex = 0, charIndex = 0) {
+  if (lineIndex >= lines.length) {
+    bootText.innerHTML += "<span class='cursor'>_</span>";
+    return;
+  }
+
+  const currentLine = lines[lineIndex];
+
+  if (charIndex < currentLine.length) {
+    bootText.innerHTML += currentLine[charIndex];
+    setTimeout(() => {
+      typeBootText(lines, lineIndex, charIndex + 1);
+    }, 40);
+  } else {
+    bootText.innerHTML += "\n";
+    setTimeout(() => {
+      typeBootText(lines, lineIndex + 1, 0);
+    }, 300);
+  }
+}
 
 bootSequence();
