@@ -32,8 +32,8 @@ Available commands:
 `,
 
   about: `
-Eman Tahir
-Computer Science Undergraduate — University of Liverpool
+Eman Fatima
+2nd Year Computer Science Undergraduate — University of Liverpool
 
 Interests:
 - Backend & systems engineering
@@ -50,20 +50,18 @@ and strong architectural foundations.
 [1] Finance Tracker v2
     Full-stack finance & investment simulator
     Stack: Java, Spring Boot, React
-    Focus: API design, system architecture
-    Repo: https://github.com/emanntahirr/finance-tracker-v2
+    <a href="https://github.com/emanntahirr/finance-tracker-v2" target="_blank">View repository</a>
 
 [2] Application Layer Chat
     TCP socket-based chat application
     Stack: Java
-    Focus: Networking fundamentals
-    Repo: https://github.com/emanntahirr/Application-Layer-Chat
+    <a href="https://github.com/emanntahirr/Application-Layer-Chat" target="_blank">View repository</a>
 
 [3] Advent of Code 2025 (Java)
-    Daily algorithmic challenges
-    Focus: data structures & problem solving
-    Repo: https://github.com/emanntahirr/advent-of-code-2025-java
+    Algorithmic problem solving challenges
+    <a href="https://github.com/emanntahirr/advent-of-code-2025-java" target="_blank">View repository</a>
 `,
+
 
   skills: `
 Languages:
@@ -92,11 +90,19 @@ Currently:
 
   contact: `
 GitHub: https://github.com/emanntahirr
-LinkedIn: https://www.linkedin.com
+LinkedIn: https://www.linkedin.com/in/eman-fatima-tahir-4ab6b4267/
+Email: emanfatima.1131@gmail.com
 `,
 
   clear: ""
 };
+
+const projectLinks = {
+  "open finance": "https://github.com/emanntahirr/finance-tracker-v2",
+  "open chat": "https://github.com/emanntahirr/Application-Layer-Chat",
+  "open aoc": "https://github.com/emanntahirr/advent-of-code-2025-java",
+};
+
 
 function print(text) {
   output.innerHTML += text + "\n";
@@ -135,10 +141,14 @@ input.addEventListener("keydown", function (e) {
     print(`> ${cmd}`);
 
     if (commands[cmd]) {
-      print(commands[cmd]);
-    } else {
-      print("Command not recognised.");
-    }
+  print(commands[cmd]);
+} else if (projectLinks[cmd]) {
+  print(`Opening ${cmd.replace("open ", "")}…`);
+  window.open(projectLinks[cmd], "_blank");
+} else {
+  print("Command not recognised.");
+}
+
 
     input.value = "";
   }
