@@ -114,6 +114,7 @@ function bootSequence() {
 
     setTimeout(() => {
       bootScreen.style.display = "none";
+      terminalWelcome();
     }, 600);
   }, { once: true });
 }
@@ -122,21 +123,27 @@ function bootSequence() {
 input.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     const cmd = input.value.trim();
+
+    if (cmd === "") return;
+
+    if (cmd === "clear") {
+      output.innerHTML = "";
+      input.value = "";
+      return;
+    }
+
     print(`> ${cmd}`);
 
     if (commands[cmd]) {
-      if (cmd === "clear") {
-        output.innerHTML = "";
-      } else {
-        print(commands[cmd]);
-      }
-    } else if (cmd !== "") {
-      print("command not found. type 'help'");
+      print(commands[cmd]);
+    } else {
+      print("Command not recognised.");
     }
 
     input.value = "";
   }
 });
+
 
 function typeBootText(lines, lineIndex = 0, charIndex = 0) {
   if (lineIndex >= lines.length) {
@@ -193,6 +200,22 @@ let binaryInterval;
 function startBinaryAnimation() {
   initBinaryGrid();
   binaryInterval = setInterval(drawBinaryGrid, 120);
+}
+
+function terminalWelcome() {
+  print("Hi, I'm Eman.");
+  print("");
+  print("This is an interactive portfolio.");
+  print("You can explore my background, projects, and skills.");
+  print("");
+  print("What would you like to see?");
+  print("");
+  print("Try:");
+  print("- about");
+  print("- projects");
+  print("- skills");
+  print("- contact");
+  print("");
 }
 
 bootSequence();
