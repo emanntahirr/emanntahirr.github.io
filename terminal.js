@@ -111,7 +111,11 @@ function print(text) {
 
 function bootSequence() {
   startBinaryAnimation();
+
+setTimeout(() => {
   typeBootText(bootLines);
+}, 400);
+
 
   document.addEventListener("keydown", () => {
     bootScreen.classList.add("fade-out");
@@ -155,26 +159,39 @@ input.addEventListener("keydown", function (e) {
 });
 
 
+function randomDelay(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function typeBootText(lines, lineIndex = 0, charIndex = 0) {
   if (lineIndex >= lines.length) {
     bootText.innerHTML += "<span class='cursor'>_</span>";
     return;
   }
 
-  const currentLine = lines[lineIndex];
+  const line = lines[lineIndex];
 
-  if (charIndex < currentLine.length) {
-    bootText.innerHTML += currentLine[charIndex];
+  if (charIndex < line.length) {
+    const char = line[charIndex];
+    bootText.innerHTML += char;
+
+    let delay = randomDelay(25, 60);
+
+    if (char === "." || char === "," || char === "|") {
+      delay += 120;
+    }
+
     setTimeout(() => {
       typeBootText(lines, lineIndex, charIndex + 1);
-    }, 40);
+    }, delay);
   } else {
     bootText.innerHTML += "\n";
     setTimeout(() => {
       typeBootText(lines, lineIndex + 1, 0);
-    }, 300);
+    }, randomDelay(250, 450));
   }
 }
+
 
 function initBinaryGrid() {
   canvas.width = window.innerWidth;
