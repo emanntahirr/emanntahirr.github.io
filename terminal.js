@@ -180,7 +180,7 @@ function initBinaryGrid() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const fontSize = 16;
+  const fontSize = 14;
   cols = Math.floor(canvas.width / fontSize);
   rows = Math.floor(canvas.height / fontSize);
 
@@ -188,23 +188,27 @@ function initBinaryGrid() {
     Math.random() > 0.5 ? "1" : "0"
   );
 
-  ctx.font = `${fontSize}px JetBrains Mono`;
+  ctx.font = `${fontSize}px VT323`;
   ctx.fillStyle = "#4fd1c5";
 }
 function drawBinaryGrid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(11, 14, 17, 0.25)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#4fd1c5";
 
   for (let i = 0; i < grid.length; i++) {
-    if (Math.random() > 0.98) {
+    if (Math.random() > 0.995) {
       grid[i] = grid[i] === "0" ? "1" : "0";
     }
 
-    const x = (i % cols) * 16;
-    const y = Math.floor(i / cols) * 16;
+    const x = (i % cols) * 14;
+    const y = Math.floor(i / cols) * 14;
 
     ctx.fillText(grid[i], x, y);
   }
 }
+
 let binaryInterval;
 
 function startBinaryAnimation() {
